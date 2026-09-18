@@ -610,15 +610,13 @@
       form.appendChild(input);
     });
 
-    const submit = document.createElement('input');
-    submit.type = 'hidden';
-    submit.name = 'submit';
-    submit.value = 'Submit';
-    form.appendChild(submit);
-
     document.body.appendChild(form);
-    form.submit();
-    setTimeout(() => form.remove(), 1500);
+
+    // Không thêm input name="submit" vì nó sẽ ghi đè method form.submit().
+    // Gọi trực tiếp prototype để gửi form ổn định trên Safari/Chrome.
+    HTMLFormElement.prototype.submit.call(form);
+
+    setTimeout(() => form.remove(), 2000);
   }
 
   function submitSurvey(){
