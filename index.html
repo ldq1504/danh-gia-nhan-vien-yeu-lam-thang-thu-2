@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tháng Thứ Hai Của Chúng Mình</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tháng Thứ Hai Của Chúng Mình</title>
+<style>
     :root{
       --bg:#f6efea;
       --paper:#fffaf8;
@@ -195,303 +196,271 @@
 </head>
 <body>
 <div class="app">
-  <div class="progress" id="progress"></div>
-  <div class="topbar">
-    <div class="brand">Two Months, Still Choosing You</div>
-    <div class="counter" id="counter">01 / 07</div>
-  </div>
-
-  <div class="slides" id="slides">
-    <!-- Page 1 -->
-    <section class="slide">
-      <div class="card">
-        <div class="eyebrow">Trang 1 • Câu hỏi mở đầu</div>
-        <h1>Hai tháng rồi,<br>em vẫn muốn anh ở cạnh em thật lâu chứ<span class="heart">?</span></h1>
-        <p class="sub">Chọn câu trả lời thật lòng nhất của em nhé. Sau đó tick vào lời cam kết bên dưới để qua trang tiếp theo ♡</p>
-
-        <div class="choices" id="q1Options">
-          <label class="option-card" onclick="selectSingle('q1', this, 'CÓ, VẪN MUỐN LẮM ♥', 'Anh biết ngay mà ♡ Tháng thứ ba mình tiếp tục nhé!')">
-            <input type="radio" name="q1" />
-            <div class="option-text">
-              <strong>CÓ, VẪN MUỐN LẮM ♥</strong>
-              <small>Mức độ khẳng định cao, đáng tin cậy và rất dễ thương.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectSingle('q1', this, 'MUỐN HƠN THÁNG TRƯỚC NỮA ♥', 'Câu này anh sẽ lưu lại làm bằng chứng đó nháaaa hề hề ♥')">
-            <input type="radio" name="q1" />
-            <div class="option-text">
-              <strong>MUỐN HƠN THÁNG TRƯỚC NỮA ♥</strong>
-              <small>Phiên bản nâng cấp của yêu thương và ưu ái.</small>
-            </div>
-          </label>
-        </div>
-
-        <div class="response" id="q1Response"></div>
-
-        <label class="confirm-row">
-          <input type="checkbox" id="promiseCheck" onchange="updatePage1Gate()" />
-          <div><strong>Em thề, nói điêu làm cúnnnnn woof woof ૮₍ ´˶• ᴥ •˶` ₎ა</strong><br><span style="color:var(--muted)">Phải tick mục này thì mới qua trang tiếp theo được nháaaa hề hề.</span></div>
-        </label>
-
-        <div class="navrow">
-          <button class="navbtn" id="page1Next" onclick="go(1)" disabled style="opacity:.45;cursor:not-allowed">Tiếp tục →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Page 2 -->
-    <section class="slide">
-      <div class="card">
-        <div class="eyebrow">Trang 2 • Những khoảnh khắc của tháng thứ hai</div>
-        <h2>Ba tấm ảnh nhỏ, nhưng là ba lần tim rung lên rất rõ<span class="heart">.</span></h2>
-        <p class="sub">Mình đã chèn sẵn 3 ảnh bạn gửi vào trang này để web giống một cuốn lưu niệm mini hơn.</p>
-
-        <div class="gallery">
-          <div class="photo-card">
-            <img src="assets/photo-1.jpg" alt="Ảnh 1">
-            <div class="photo-caption">Khoảnh khắc đáng yêu với chiếc ảnh nhỏ trên tay.</div>
-          </div>
-          <div class="photo-card">
-            <img src="assets/photo-3.jpg" alt="Ảnh 3">
-            <div class="photo-caption">Tấm selfie chung — minh chứng cho sự ưu ái có thật.</div>
-          </div>
-          <div class="photo-card">
-            <img src="assets/photo-2.jpg" alt="Ảnh 2">
-            <div class="photo-caption">Một tấm ảnh nhẹ nhàng và rất xinh của Sếp Nhím.</div>
-          </div></div>
-
-        <div class="navrow">
-          <button class="navbtn secondary" onclick="go(0)">← Quay lại</button>
-          <button class="navbtn" onclick="go(2)">Tiếp tục →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Page 3 -->
-    <section class="slide">
-      <div class="card">
-        <div class="eyebrow">Trang 3 • Hiểu nhau hơn một chút</div>
-        <h2>Nếu chọn một điều em thích nhất ở “chúng mình”, đó sẽ là gì<span class="heart">?</span></h2>
-
-        <div class="single-grid" id="q3Options">
-          <label class="option-card" onclick="selectSingle('q3', this, 'Được là chính mình khi ở cạnh nhau', 'Anh cũng thích cảm giác được là chính mình khi ở cạnh em.')">
-            <input type="radio" name="q3" />
-            <div class="option-text">
-              <strong>Được là chính mình khi ở cạnh nhau</strong>
-              <small>Một cảm giác rất hiếm, nhưng rất thật.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectSingle('q3', this, 'Những câu chuyện chẳng bao giờ hết', 'Vậy mình còn rất nhiều câu chuyện phải kể cho nhau rồi ♡')">
-            <input type="radio" name="q3" />
-            <div class="option-text">
-              <strong>Những câu chuyện chẳng bao giờ hết</strong>
-              <small>Luôn có điều để chia sẻ cùng nhau.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectSingle('q3', this, 'Những lần nhớ nhau dù vừa mới gặp', 'Anh cũng thế. Có những lúc vừa gặp xong đã thấy nhớ rồi.')">
-            <input type="radio" name="q3" />
-            <div class="option-text">
-              <strong>Những lần nhớ nhau dù vừa mới gặp</strong>
-              <small>Triệu chứng thường thấy của việc thương nhau.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectSingle('q3', this, 'Cách hai đứa vẫn chọn nhau mỗi ngày', 'Đây cũng là điều anh trân trọng nhất: hai đứa vẫn chọn nhau.')">
-            <input type="radio" name="q3" />
-            <div class="option-text">
-              <strong>Cách hai đứa vẫn chọn nhau mỗi ngày</strong>
-              <small>Sự bền bỉ dịu dàng rất đáng quý.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectOtherQ3(this)">
-            <input type="radio" name="q3" />
-            <div class="option-text">
-              <strong>Cái khác</strong>
-              <small>Nếu còn một điều riêng khác, hãy liệt kê vào bên dưới.</small>
-            </div>
-          </label>
-        </div>
-
-        <div class="other-box" id="q3OtherBox">
-          <strong>Liệt kê điều em thích nhất ở “chúng mình”:</strong>
-          <textarea id="q3OtherText" placeholder="Ví dụ: cách anh nhường nhịn em, những lần hai đứa cùng ngồi nói chuyện, sự chân thành, cảm giác an toàn..."></textarea>
-        </div>
-
-        <div class="response" id="q3Response"></div>
-
-        <div class="navrow">
-          <button class="navbtn secondary" onclick="go(1)">← Quay lại</button>
-          <button class="navbtn" onclick="go(3)">Tiếp tục →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Page 4 -->
-    <section class="slide">
-      <div class="card">
-        <div class="eyebrow">Trang 4 • Tháng tiếp theo mình muốn gì hơn</div>
-        <h2>Tháng tiếp theo, mình cùng nhau làm gì nhiều hơn<span class="heart">?</span></h2>
-        <p class="sub">Trang này có thể chọn nhiều lựa chọn nhé.</p>
-
-        <div class="multi-grid" id="q4Options">
-          <label class="option-card" onclick="toggleMulti(this)">
-            <input type="checkbox" value="Thêm thật nhiều buổi hẹn" />
-            <div class="option-text">
-              <strong>Thêm thật nhiều buổi hẹn</strong>
-              <small>Để có thêm nhiều ngày đáng nhớ hơn nữa.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="toggleMulti(this)">
-            <input type="checkbox" value="Cùng nhau đi đâu đó" />
-            <div class="option-text">
-              <strong>Cùng nhau đi đâu đó</strong>
-              <small>Một chuyến đi nhỏ cũng đủ vui nếu đi cùng nhau.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="toggleMulti(this)">
-            <input type="checkbox" value="Ít giận dỗi, nhiều ôm hơn" />
-            <div class="option-text">
-              <strong>Ít giận dỗi, nhiều ôm hơn</strong>
-              <small>Tối ưu hiệu suất hạnh phúc và giảm lỗi hệ thống.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="toggleMulti(this)">
-            <input type="checkbox" value="Cứ bình yên như bây giờ" />
-            <div class="option-text">
-              <strong>Cứ bình yên như bây giờ</strong>
-              <small>Bình yên cũng là một kiểu hạnh phúc rất đẹp.</small>
-            </div>
-          </label>
-        </div>
-
-        <div class="navrow">
-          <button class="navbtn secondary" onclick="go(2)">← Quay lại</button>
-          <button class="navbtn" onclick="go(4)">Tiếp tục →</button>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- Page 5 -->
-    <section class="slide">
-      <div class="card">
-        <div class="eyebrow">Trang 5 • Lời nhắn từ anh</div>
-        <h2>Gửi Nhímiuoiii bé xinh cụa anh<span class="heart"> ♥</span></h2>
-
-        <div class="message-box">
+<div class="progress" id="progress"></div>
+<div class="topbar">
+<div class="brand">Two Months, Still Choosing You</div>
+<div class="counter" id="counter">01 / 07</div>
+</div>
+<div class="slides" id="slides">
+<!-- Page 1 -->
+<section class="slide">
+<div class="card">
+<div class="eyebrow">Trang 1 • Câu hỏi mở đầu</div>
+<h1>Hai tháng rồi,<br/>em vẫn muốn anh ở cạnh em thật lâu chứ<span class="heart">?</span></h1>
+<p class="sub">Chọn câu trả lời thật lòng nhất của em nhé. Sau đó tick vào lời cam kết bên dưới để qua trang tiếp theo ♡</p>
+<div class="choices" id="q1Options">
+<label class="option-card" onclick="selectSingle('q1', this, 'CÓ, VẪN MUỐN LẮM ♥', 'Anh biết ngay mà ♡ Tháng thứ ba mình tiếp tục nhé!')">
+<input name="q1" type="radio"/>
+<div class="option-text">
+<strong>CÓ, VẪN MUỐN LẮM ♥</strong>
+<small>Mức độ khẳng định cao, đáng tin cậy và rất dễ thương.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectSingle('q1', this, 'MUỐN HƠN THÁNG TRƯỚC NỮA ♥', 'Câu này anh sẽ lưu lại làm bằng chứng đó nháaaa hề hề ♥')">
+<input name="q1" type="radio"/>
+<div class="option-text">
+<strong>MUỐN HƠN THÁNG TRƯỚC NỮA ♥</strong>
+<small>Phiên bản nâng cấp của yêu thương và ưu ái.</small>
+</div>
+</label>
+</div>
+<div class="response" id="q1Response"></div>
+<label class="confirm-row">
+<input id="promiseCheck" onchange="updatePage1Gate()" type="checkbox"/>
+<div><strong>Em thề, nói điêu làm cúnnnnn woof woof ૮₍ ´˶• ᴥ •˶` ₎ა</strong><br/><span style="color:var(--muted)">Phải tick mục này thì mới qua trang tiếp theo được nháaaa hề hề.</span></div>
+</label>
+<div class="navrow">
+<button class="navbtn" disabled="" id="page1Next" onclick="go(1)" style="opacity:.45;cursor:not-allowed">Tiếp tục →</button>
+</div>
+</div>
+</section>
+<!-- Page 2 -->
+<section class="slide">
+<div class="card">
+<div class="eyebrow">Trang 2 • Những khoảnh khắc của tháng thứ hai</div>
+<h2>Ba tấm ảnh nhỏ, nhưng là ba lần tim rung lên rất rõ<span class="heart">.</span></h2>
+<p class="sub">Mình đã chèn sẵn 3 ảnh bạn gửi vào trang này để web giống một cuốn lưu niệm mini hơn.</p>
+<div class="gallery">
+<div class="photo-card">
+<img alt="Ảnh 1" src="assets/photo-1.jpg"/>
+<div class="photo-caption">Khoảnh khắc đáng yêu với chiếc ảnh nhỏ trên tay.</div>
+</div>
+<div class="photo-card">
+<img alt="Ảnh 3" src="assets/photo-3.jpg"/>
+<div class="photo-caption">Tấm selfie chung — minh chứng cho sự ưu ái có thật.</div>
+</div>
+<div class="photo-card">
+<img alt="Ảnh 2" src="assets/photo-2.jpg"/>
+<div class="photo-caption">Một tấm ảnh nhẹ nhàng và rất xinh của Sếp Nhím.</div>
+</div></div>
+<div class="navrow">
+<button class="navbtn secondary" onclick="go(0)">← Quay lại</button>
+<button class="navbtn" onclick="go(2)">Tiếp tục →</button>
+</div>
+</div>
+</section>
+<!-- Page 3 -->
+<section class="slide">
+<div class="card">
+<div class="eyebrow">Trang 3 • Hiểu nhau hơn một chút</div>
+<h2>Nếu chọn một điều em thích nhất ở “chúng mình”, đó sẽ là gì<span class="heart">?</span></h2>
+<div class="single-grid" id="q3Options">
+<label class="option-card" onclick="selectSingle('q3', this, 'Được là chính mình khi ở cạnh nhau', 'Anh cũng thích cảm giác được là chính mình khi ở cạnh em.')">
+<input name="q3" type="radio"/>
+<div class="option-text">
+<strong>Được là chính mình khi ở cạnh nhau</strong>
+<small>Một cảm giác rất hiếm, nhưng rất thật.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectSingle('q3', this, 'Những câu chuyện chẳng bao giờ hết', 'Vậy mình còn rất nhiều câu chuyện phải kể cho nhau rồi ♡')">
+<input name="q3" type="radio"/>
+<div class="option-text">
+<strong>Những câu chuyện chẳng bao giờ hết</strong>
+<small>Luôn có điều để chia sẻ cùng nhau.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectSingle('q3', this, 'Những lần nhớ nhau dù vừa mới gặp', 'Anh cũng thế. Có những lúc vừa gặp xong đã thấy nhớ rồi.')">
+<input name="q3" type="radio"/>
+<div class="option-text">
+<strong>Những lần nhớ nhau dù vừa mới gặp</strong>
+<small>Triệu chứng thường thấy của việc thương nhau.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectSingle('q3', this, 'Cách hai đứa vẫn chọn nhau mỗi ngày', 'Đây cũng là điều anh trân trọng nhất: hai đứa vẫn chọn nhau.')">
+<input name="q3" type="radio"/>
+<div class="option-text">
+<strong>Cách hai đứa vẫn chọn nhau mỗi ngày</strong>
+<small>Sự bền bỉ dịu dàng rất đáng quý.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectOtherQ3(this)">
+<input name="q3" type="radio"/>
+<div class="option-text">
+<strong>Cái khác</strong>
+<small>Nếu còn một điều riêng khác, hãy liệt kê vào bên dưới.</small>
+</div>
+</label>
+</div>
+<div class="other-box" id="q3OtherBox">
+<strong>Liệt kê điều em thích nhất ở “chúng mình”:</strong>
+<textarea id="q3OtherText" placeholder="Ví dụ: cách anh nhường nhịn em, những lần hai đứa cùng ngồi nói chuyện, sự chân thành, cảm giác an toàn..."></textarea>
+</div>
+<div class="response" id="q3Response"></div>
+<div class="navrow">
+<button class="navbtn secondary" onclick="go(1)">← Quay lại</button>
+<button class="navbtn" onclick="go(3)">Tiếp tục →</button>
+</div>
+</div>
+</section>
+<!-- Page 4 -->
+<section class="slide">
+<div class="card">
+<div class="eyebrow">Trang 4 • Tháng tiếp theo mình muốn gì hơn</div>
+<h2>Tháng tiếp theo, mình cùng nhau làm gì nhiều hơn<span class="heart">?</span></h2>
+<p class="sub">Trang này có thể chọn nhiều lựa chọn nhé.</p>
+<div class="multi-grid" id="q4Options">
+<label class="option-card" onclick="toggleMulti(this)">
+<input type="checkbox" value="Thêm thật nhiều buổi hẹn"/>
+<div class="option-text">
+<strong>Thêm thật nhiều buổi hẹn</strong>
+<small>Để có thêm nhiều ngày đáng nhớ hơn nữa.</small>
+</div>
+</label>
+<label class="option-card" onclick="toggleMulti(this)">
+<input type="checkbox" value="Cùng nhau đi đâu đó"/>
+<div class="option-text">
+<strong>Cùng nhau đi đâu đó</strong>
+<small>Một chuyến đi nhỏ cũng đủ vui nếu đi cùng nhau.</small>
+</div>
+</label>
+<label class="option-card" onclick="toggleMulti(this)">
+<input type="checkbox" value="Ít giận dỗi, nhiều ôm hơn"/>
+<div class="option-text">
+<strong>Ít giận dỗi, nhiều ôm hơn</strong>
+<small>Tối ưu hiệu suất hạnh phúc và giảm lỗi hệ thống.</small>
+</div>
+</label>
+<label class="option-card" onclick="toggleMulti(this)">
+<input type="checkbox" value="Cứ bình yên như bây giờ"/>
+<div class="option-text">
+<strong>Cứ bình yên như bây giờ</strong>
+<small>Bình yên cũng là một kiểu hạnh phúc rất đẹp.</small>
+</div>
+</label>
+</div>
+<div class="navrow">
+<button class="navbtn secondary" onclick="go(2)">← Quay lại</button>
+<button class="navbtn" onclick="go(4)">Tiếp tục →</button>
+</div>
+</div>
+</section>
+<!-- Page 5 -->
+<section class="slide">
+<div class="card">
+<div class="eyebrow">Trang 5 • Lời nhắn từ anh</div>
+<h2>Gửi Nhímiuoiii bé xinh cụa anh<span class="heart"> ♥</span></h2>
+<div class="message-box">
           Cảm ơn em luôn dành cho anh sự yêu thương và ưu tiên tuyệt đối.
           Anh thực sự trân trọng thời gian ở bên em, cả những khi em giận để anh biết mình còn nhiều thiếu xót cần phải nâng cấp phần mềm.
           Anh tin chắc rằng mọi thứ sẽ trở nên tốt đẹp hơn sau những lần mình cùng ngồi xuống và giải quyết vấn đề cùng nhau.
           A mong em hãy cứ là em Nhímiuoiii bé xinh cụa anh, mọi thứ xung quanh, hãy cho anh cơ hội được cáng đáng &lt;3
-          <br><br>
-          <strong style="font-size:1.25em;color:var(--rose)">ANHH YÊUUU EMMMMM</strong>
-        </div>
-
-        <div class="navrow">
-          <button class="navbtn secondary" onclick="go(3)">← Quay lại</button>
-          <button class="navbtn" onclick="go(5)">Tiếp tục →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Page 6 -->
-    <section class="slide">
-      <div class="card">
-        <div class="eyebrow">Trang 6 • Khảo sát mức độ hài lòng</div>
-        <h2>Khảo sát mức độ hài lòng với nhân viên ưu ái (yêu dấu) sau 2 tháng thử việc<span class="heart">:</span></h2>
-        <p class="sub">Vui lòng chọn 1 mức độ phù hợp nhất.</p>
-
-        <div class="single-grid" id="q5Options">
-          <label class="option-card" onclick="selectSingle('q5', this, 'Xuất sắc (90-100 điểm)', 'Nhân viên này có vẻ sắp được xét duyệt vượt cấp rồi đó nháaaa hề hề.')">
-            <input type="radio" name="q5" />
-            <div class="option-text">
-              <strong>Xuất sắc (90-100 điểm)</strong>
-              <small>Vượt yêu cầu đề ra, chủ động, sáng tạo, có đóng góp nổi bật.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectSingle('q5', this, 'Tốt (75-89 điểm)', 'Báo cáo ghi nhận: chất lượng ổn định, ít sai sót, thái độ dễ thương.')">
-            <input type="radio" name="q5" />
-            <div class="option-text">
-              <strong>Tốt (75-89 điểm)</strong>
-              <small>Đáp ứng tốt yêu cầu, hoàn thành đầy đủ nhiệm vụ với chất lượng ổn định, ít sai sót.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectSingle('q5', this, 'Đạt (60-74 điểm)', 'Ổn áp, nhưng chắc vẫn còn cơ hội để nâng cấp tiếp.')">
-            <input type="radio" name="q5" />
-            <div class="option-text">
-              <strong>Đạt (60-74 điểm)</strong>
-              <small>Đáp ứng yêu cầu công việc ở mức cơ bản, hoàn thành các nhiệm vụ chính nhưng chưa có điểm nổi bật.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectSingle('q5', this, 'Cần cải thiện (40-59 điểm)', 'Nhân viên xin ghi nhận góp ý và cam kết sửa đổi ạ.')">
-            <input type="radio" name="q5" />
-            <div class="option-text">
-              <strong>Cần cải thiện (40-59)</strong>
-              <small>Hoàn thành công việc còn hạn chế, cần tiếp tục theo dõi, hỗ trợ thêm trong thời gian tới.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectSingle('q5', this, 'Không đạt (Dưới 40 điểm)', 'Phòng nhân sự xin phép khóc một chút rồi làm lại từ đầu ạ.')">
-            <input type="radio" name="q5" />
-            <div class="option-text">
-              <strong>Không đạt (Dưới 40)</strong>
-              <small>Chưa đáp ứng yêu cầu công việc, không đủ căn cứ để xem xét ký hợp đồng chính thức.</small>
-            </div>
-          </label>
-        </div>
-
-        <div class="response" id="q5Response"></div>
-
-        <div class="navrow">
-          <button class="navbtn secondary" onclick="go(4)">← Quay lại</button>
-          <button class="navbtn" onclick="go(6)">Tiếp tục →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Page 7 -->
-    <section class="slide">
-      <div class="card">
-        <div class="eyebrow">Trang 7 • Quyết định bổ nhiệm & feedback</div>
-        <h2>Quyết định bổ nhiệm nhân viên chính thức<span class="heart">.</span></h2>
-
-        <div class="two-grid" id="q6Options">
-          <label class="option-card" onclick="selectSingle('q6', this, 'Nhân viên thử việc đạt yêu cầu thử việc, đề xuất bổ nhiệm lên làm nhân viên chính thức trước thời hạn', 'Phòng nhân sự đang rất xúc động trước kết quả này.')">
-            <input type="radio" name="q6" />
-            <div class="option-text">
-                            <small>Nhân viên thử việc đạt yêu cầu thử việc, đề xuất bổ nhiệm lên làm nhân viên chính thức trước thời hạn.</small>
-            </div>
-          </label>
-          <label class="option-card" onclick="selectSingle('q6', this, 'Nhân viên thử việc đang hoàn thành công việc ở mức tốt, tuy nhiên cần đánh giá thêm 1 tháng trước khi bổ nhiệm làm nhân viên chính thức', 'Nhân viên chấp nhận tiếp tục nỗ lực để đạt mức xuất sắc ạ.')">
-            <input type="radio" name="q6" />
-            <div class="option-text">
-                            <small>Nhân viên thử việc đang hoàn thành công việc ở mức tốt, tuy nhiên cần đánh giá thêm 1 tháng trước khi bổ nhiệm làm nhân viên chính thức.</small>
-            </div>
-          </label>
-        </div>
-
-        <div class="response" id="q6Response"></div>
-
-        <div class="boss-note">
-          <h3>Lời nhắn và feedback cá nhân từ Sếp Nhím</h3>
-          <p style="margin:10px 0 14px;color:var(--muted)">
+          <br/><br/>
+<strong style="font-size:1.25em;color:var(--rose)">ANHH YÊUUU EMMMMM</strong>
+</div>
+<div class="navrow">
+<button class="navbtn secondary" onclick="go(3)">← Quay lại</button>
+<button class="navbtn" onclick="go(5)">Tiếp tục →</button>
+</div>
+</div>
+</section>
+<!-- Page 6 -->
+<section class="slide">
+<div class="card">
+<div class="eyebrow">Trang 6 • Khảo sát mức độ hài lòng</div>
+<h2>Khảo sát mức độ hài lòng với nhân viên ưu ái (yêu dấu) sau 2 tháng thử việc<span class="heart">:</span></h2>
+<p class="sub">Vui lòng chọn 1 mức độ phù hợp nhất.</p>
+<div class="single-grid" id="q5Options">
+<label class="option-card" onclick="selectSingle('q5', this, 'Xuất sắc (90-100 điểm)', 'Nhân viên này có vẻ sắp được xét duyệt vượt cấp rồi đó nháaaa hề hề.')">
+<input name="q5" type="radio"/>
+<div class="option-text">
+<strong>Xuất sắc (90-100 điểm)</strong>
+<small>Vượt yêu cầu đề ra, chủ động, sáng tạo, có đóng góp nổi bật.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectSingle('q5', this, 'Tốt (75-89 điểm)', 'Báo cáo ghi nhận: chất lượng ổn định, ít sai sót, thái độ dễ thương.')">
+<input name="q5" type="radio"/>
+<div class="option-text">
+<strong>Tốt (75-89 điểm)</strong>
+<small>Đáp ứng tốt yêu cầu, hoàn thành đầy đủ nhiệm vụ với chất lượng ổn định, ít sai sót.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectSingle('q5', this, 'Đạt (60-74 điểm)', 'Ổn áp, nhưng chắc vẫn còn cơ hội để nâng cấp tiếp.')">
+<input name="q5" type="radio"/>
+<div class="option-text">
+<strong>Đạt (60-74 điểm)</strong>
+<small>Đáp ứng yêu cầu công việc ở mức cơ bản, hoàn thành các nhiệm vụ chính nhưng chưa có điểm nổi bật.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectSingle('q5', this, 'Cần cải thiện (40-59 điểm)', 'Nhân viên xin ghi nhận góp ý và cam kết sửa đổi ạ.')">
+<input name="q5" type="radio"/>
+<div class="option-text">
+<strong>Cần cải thiện (40-59)</strong>
+<small>Hoàn thành công việc còn hạn chế, cần tiếp tục theo dõi, hỗ trợ thêm trong thời gian tới.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectSingle('q5', this, 'Không đạt (Dưới 40 điểm)', 'Phòng nhân sự xin phép khóc một chút rồi làm lại từ đầu ạ.')">
+<input name="q5" type="radio"/>
+<div class="option-text">
+<strong>Không đạt (Dưới 40)</strong>
+<small>Chưa đáp ứng yêu cầu công việc, không đủ căn cứ để xem xét ký hợp đồng chính thức.</small>
+</div>
+</label>
+</div>
+<div class="response" id="q5Response"></div>
+<div class="navrow">
+<button class="navbtn secondary" onclick="go(4)">← Quay lại</button>
+<button class="navbtn" onclick="go(6)">Tiếp tục →</button>
+</div>
+</div>
+</section>
+<!-- Page 7 -->
+<section class="slide">
+<div class="card">
+<div class="eyebrow">Trang 7 • Quyết định bổ nhiệm &amp; feedback</div>
+<h2>Quyết định bổ nhiệm nhân viên chính thức<span class="heart">.</span></h2>
+<div class="two-grid" id="q6Options">
+<label class="option-card" onclick="selectSingle('q6', this, 'Nhân viên thử việc đạt yêu cầu thử việc, đề xuất bổ nhiệm lên làm nhân viên chính thức trước thời hạn', 'Phòng nhân sự đang rất xúc động trước kết quả này.')">
+<input name="q6" type="radio"/>
+<div class="option-text">
+<small>Nhân viên thử việc đạt yêu cầu thử việc, đề xuất bổ nhiệm lên làm nhân viên chính thức trước thời hạn.</small>
+</div>
+</label>
+<label class="option-card" onclick="selectSingle('q6', this, 'Nhân viên thử việc đang hoàn thành công việc ở mức tốt, tuy nhiên cần đánh giá thêm 1 tháng trước khi bổ nhiệm làm nhân viên chính thức', 'Nhân viên chấp nhận tiếp tục nỗ lực để đạt mức xuất sắc ạ.')">
+<input name="q6" type="radio"/>
+<div class="option-text">
+<small>Nhân viên thử việc đang hoàn thành công việc ở mức tốt, tuy nhiên cần đánh giá thêm 1 tháng trước khi bổ nhiệm làm nhân viên chính thức.</small>
+</div>
+</label>
+</div>
+<div class="response" id="q6Response"></div>
+<div class="boss-note">
+<h3>Lời nhắn và feedback cá nhân từ Sếp Nhím</h3>
+<p style="margin:10px 0 14px;color:var(--muted)">
             Phần này dành riêng cho Sếp Nhím tự tay đánh giá nhân viên ưu ái sau 2 tháng thử việc ♡
           </p>
-          <textarea id="bossFeedback" placeholder="Sếp Nhím viết lời nhắn, nhận xét, góp ý hoặc yêu cầu nâng cấp phần mềm tại đây..."></textarea>
-        </div>
+<textarea id="bossFeedback" placeholder="Sếp Nhím viết lời nhắn, nhận xét, góp ý hoặc yêu cầu nâng cấp phần mềm tại đây..."></textarea>
 </div>
-
-        <div class="navrow">
-          <button class="navbtn secondary" onclick="go(5)">← Quay lại</button>
-          <button class="navbtn rose" onclick="submitSurvey()">Nộp phiếu đánh giá ♥</button>
-          <button class="navbtn" onclick="hearts()">Bắn tim</button>
-        </div>
-
-        <div class="status" id="submitStatus"></div>
-      </div>
-    </section>
-  </div>
-
-  <div class="footer">Made with ♥ for our second month • 2026</div>
 </div>
+<div class="navrow">
+<button class="navbtn secondary" onclick="go(5)">← Quay lại</button>
+<button class="navbtn rose" onclick="submitSurvey()">Nộp phiếu đánh giá ♥</button>
+<button class="navbtn" onclick="hearts()">Bắn tim</button>
+</div>
+<div class="status" id="submitStatus"></div>
+</section></div>
+
+</div>
+<div class="footer">Made with ♥ for our second month • 2026</div>
 
 <script>
   let current = 0;
