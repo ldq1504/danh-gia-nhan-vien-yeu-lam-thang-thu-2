@@ -1,0 +1,43 @@
+name: Debug Google Form
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/debug-form.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch public Google Form HTML
+        run: |
+          python - <<'PY'
+          import urllib.request, re, html
+          url='https://docs.google.com/forms/d/e/1FAIpQLSd78wRIkBdAdrs4onfWtHy7EdJoy3WTlrAbU6h6GdrJ2ajDPw/viewform'
+          req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+          data=urllib.request.urlopen(req,timeout=30).read().decode('utf-8','replace')
+          open('form.html','w',encoding='utf-8').write(data)
+          pats=[
+            r'name="(entry\.\d+)"',
+            r'name="(fvv)"[^>]*value="([^"]*)"',
+            r'name="(pageHistory)"[^>]*value="([^"]*)"',
+            r'name="(fbzx)"[^>]*value="([^"]*)"',
+            r'name="(partialResponse)"[^>]*value="([^"]*)"',
+            r'<form[^>]+action="([^"]+)"'
+          ]
+          out=[]
+          for p in pats:
+            for m in re.finditer(p,data):
+              out.append(' | '.join(html.unescape(x) for x in m.groups()))
+          open('form-debug.txt','w',encoding='utf-8').write('\n'.join(out))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: google-form-debug
+          path: |
+            form-debug.txt
+            form.html
