@@ -1,3 +1,197 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Theo dõi câu trả lời</title><style>:root{--bg:#f8f1ed;--ink:#2b2222;--muted:#7f6f69;--rose:#c25774;--line:#e7d8cf}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 10%,#f7d8df,transparent 28%),var(--bg);color:var(--ink);font-family:"Times New Roman",Times,serif;min-height:100vh;padding:28px 16px}.wrap{max-width:1100px;margin:auto}.hero,.entry,.sum{background:#fffaf8ee;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 15px 45px #3c262615}.hero{padding:28px;margin-bottom:16px}h1,h3{margin:0;font-weight:500}h1{font-size:clamp(38px,6vw,64px)}p{color:var(--muted);font-size:17px;line-height:1.55}.tools{display:flex;gap:9px;flex-wrap:wrap}.btn{border:0;border-radius:999px;padding:11px 16px;background:var(--ink);color:white;font-weight:bold;cursor:pointer}.btn.alt{background:white;color:var(--ink);border:1px solid var(--line)}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}.sum b{display:block;margin-bottom:7px}.sum span{color:var(--rose);font-size:28px}.entries{display:grid;gap:12px}.meta{color:var(--muted);margin:8px 0 12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{background:white;border:1px solid var(--line);border-radius:14px;padding:12px}.field b{display:block;color:#705661;margin-bottom:6px}.empty{text-align:center;padding:28px;color:var(--muted);background:#fffaf8;border:1px dashed #d8b7c0;border-radius:20px}@media(max-width:700px){.summary,.grid{grid-template-columns:1fr}}</style></head><body><div class="wrap"><section class="hero"><h1>Theo dõi câu trả lời</h1><p>Trang quản lý riêng để xem các phản hồi đã lưu trong trình duyệt hiện tại.</p><div class="tools"><button class="btn" onclick="load()">Làm mới</button><button class="btn alt" onclick="exp()">Xuất JSON</button><button class="btn alt" onclick="clearAll()">Xoá dữ liệu</button></div></section><section class="summary" id="summary"></section><section class="entries" id="entries"></section></div><script>
-const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;");function data(){try{let x=JSON.parse(localStorage.getItem('nhi_survey_responses')||'[]');return Array.isArray(x)?x:[]}catch{return[]}}function load(){let a=data(),latest=a.length?a[a.length-1].submittedAt:'Chưa có';summary.innerHTML='<div class="sum"><b>Tổng số phản hồi</b><span>'+a.length+'</span></div><div class="sum"><b>Phản hồi mới nhất</b>'+esc(latest)+'</div><div class="sum"><b>Tình trạng</b>'+(a.length?'Đã có dữ liệu':'Chưa có dữ liệu')+'</div>';entries.innerHTML=a.length?a.slice().reverse().map(x=>'<article class="entry"><h3>'+esc(x.id)+'</h3><div class="meta">Thời gian nộp: '+esc(x.submittedAt)+'</div><div class="grid"><div class="field"><b>Trang 1 • Câu trả lời</b>'+esc(x.page1_answer)+'</div><div class="field"><b>Trang 1 • Tick lời cam kết</b>'+(x.page1_promise_checked?'Có':'Không')+'</div><div class="field"><b>Trang 3 • Điều thích nhất</b>'+esc(x.page3_answer)+'</div><div class="field"><b>Trang 3 • Nội dung khác</b>'+esc(x.page3_other_details||'—')+'</div><div class="field"><b>Trang 4 • Nhiều lựa chọn</b>'+esc((x.page4_multiple_choices||[]).join(', ')||'—')+'</div><div class="field"><b>Trang 6 • Mức độ hài lòng</b>'+esc(x.page5_satisfaction)+'</div><div class="field" style="grid-column:1/-1"><b>Trang 7 • Quyết định bổ nhiệm</b>'+esc(x.page7_decision||x.page6_decision)+'</div><div class="field" style="grid-column:1/-1"><b>Trang 7 • Feedback từ Sếp Nhím</b>'+esc(x.page7_boss_feedback||'—')+'</div></div></article>').join(''):'<div class="empty">Chưa có câu trả lời nào được lưu trên trình duyệt này.</div>'}function exp(){let b=new Blob([JSON.stringify(data(),null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='nhi_survey_responses.json';a.click();URL.revokeObjectURL(u)}function clearAll(){if(confirm('Bạn có chắc muốn xoá toàn bộ dữ liệu không?')){localStorage.removeItem('nhi_survey_responses');load()}}load();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theo dõi câu trả lời</title>
+  <style>
+    :root{
+      --bg:#f8f1ed;
+      --paper:#fffaf8;
+      --ink:#2b2222;
+      --muted:#7f6f69;
+      --rose:#c25774;
+      --line:#e7d8cf;
+      --shadow:0 16px 50px rgba(60,38,38,.1);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(247,216,223,.78), transparent 28%),
+        radial-gradient(circle at 88% 82%, rgba(239,222,213,.85), transparent 32%),
+        var(--bg);
+      color:var(--ink);
+      font-family:"Times New Roman", Times, serif;
+      min-height:100vh;
+      padding:28px 16px 40px;
+    }
+    .wrap{max-width:1120px;margin:0 auto}
+    .hero{
+      background:rgba(255,250,248,.92);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:28px;
+      margin-bottom:18px;
+    }
+    h1,h2,h3{margin:0;line-height:1.05;font-weight:500}
+    h1{font-size:clamp(36px,6vw,64px)}
+    .sub{margin-top:14px;color:var(--muted);font-size:18px;line-height:1.65}
+    .toolbar{
+      margin-top:18px;display:flex;flex-wrap:wrap;gap:10px
+    }
+    .btn{
+      border:0;border-radius:999px;padding:12px 18px;
+      background:#2b2222;color:#fff;cursor:pointer;font-weight:700
+    }
+    .btn.secondary{background:#fff;color:#2b2222;border:1px solid var(--line)}
+    .summary{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:18px
+    }
+    .summary-card,.entry{
+      background:rgba(255,250,248,.94);
+      border:1px solid var(--line);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+    }
+    .summary-card{padding:18px}
+    .summary-card strong{display:block;font-size:17px;margin-bottom:8px}
+    .summary-card span{font-size:30px;color:var(--rose)}
+    .entries{display:grid;gap:14px}
+    .entry{padding:20px}
+    .entry h3{font-size:26px;margin-bottom:10px}
+    .meta{color:var(--muted);margin-bottom:12px;font-size:16px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .field{
+      background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px
+    }
+    .field strong{display:block;margin-bottom:8px;font-size:16px;color:#6f5560}
+    .empty{
+      background:rgba(255,250,248,.94);
+      border:1px dashed #d8b7c0;
+      border-radius:22px;padding:28px;text-align:center;color:var(--muted);
+      font-size:18px;line-height:1.7;
+    }
+    @media (max-width:760px){
+      .summary,.grid{grid-template-columns:1fr}
+      .hero{padding:22px}
+      .entry{padding:16px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Theo dõi câu trả lời</h1>
+      <p class="sub">
+        Đây là trang riêng để xem lại các phản hồi đã được lưu từ web “Tháng Thứ Hai Của Chúng Mình”.
+        Dữ liệu được lưu trong trình duyệt hiện tại dưới dạng local storage.
+      </p>
+      <div class="toolbar">
+        <button class="btn" onclick="loadResponses()">Làm mới dữ liệu</button>
+        <button class="btn secondary" onclick="exportJSON()">Xuất JSON</button>
+        <button class="btn secondary" onclick="clearResponses()">Xoá toàn bộ dữ liệu</button>
+        <button class="btn secondary" onclick="window.location.href='./index.html'">Quay lại biểu mẫu</button>
+      </div>
+    </section>
+
+    <section class="summary" id="summary"></section>
+    <section class="entries" id="entries"></section>
+  </div>
+
+  <script>
+    function getResponses(){
+      try{
+        const data = JSON.parse(localStorage.getItem('nhi_survey_responses') || '[]');
+        return Array.isArray(data) ? data : [];
+      }catch(e){
+        return [];
+      }
+    }
+
+    function loadResponses(){
+      const data = getResponses();
+      renderSummary(data);
+      renderEntries(data);
+    }
+
+    function renderSummary(data){
+      const summary = document.getElementById('summary');
+      const latest = data.length ? data[data.length - 1].submittedAt : 'Chưa có';
+      summary.innerHTML = `
+        <div class="summary-card">
+          <strong>Tổng số phản hồi</strong>
+          <span>${data.length}</span>
+        </div>
+        <div class="summary-card">
+          <strong>Phản hồi mới nhất</strong>
+          <div style="font-size:20px;color:var(--rose)">${latest}</div>
+        </div>
+        <div class="summary-card">
+          <strong>Tình trạng</strong>
+          <div style="font-size:20px;color:var(--rose)">${data.length ? 'Đã có dữ liệu' : 'Chưa có dữ liệu'}</div>
+        </div>
+      `;
+    }
+
+    function renderEntries(data){
+      const entries = document.getElementById('entries');
+      if(!data.length){
+        entries.innerHTML = `
+          <div class="empty">
+            Chưa có câu trả lời nào được lưu.<br>
+            Hãy mở biểu mẫu chính, điền câu trả lời và bấm “Nộp phiếu đánh giá ♥”.
+          </div>`;
+        return;
+      }
+
+      entries.innerHTML = data.slice().reverse().map(item => `
+        <article class="entry">
+          <h3>${item.id}</h3>
+          <div class="meta">Thời gian nộp: ${item.submittedAt}</div>
+          <div class="grid">
+            <div class="field"><strong>Trang 1 • Câu trả lời</strong>${escapeHtml(item.page1_answer || '')}</div>
+            <div class="field"><strong>Trang 1 • Tick lời cam kết</strong>${item.page1_promise_checked ? 'Có' : 'Không'}</div>
+            <div class="field"><strong>Trang 3 • Điều thích nhất</strong>${escapeHtml(item.page3_answer || '')}</div>
+            <div class="field"><strong>Trang 3 • Nội dung khác</strong>${escapeHtml(item.page3_other_details || '—')}</div>
+            <div class="field"><strong>Trang 4 • Nhiều lựa chọn</strong>${escapeHtml((item.page4_multiple_choices || []).join(', ') || '—')}</div>
+            <div class="field"><strong>Trang 6 • Mức độ hài lòng</strong>${escapeHtml(item.page5_satisfaction || '')}</div>
+            <div class="field" style="grid-column:1/-1"><strong>Trang 7 • Quyết định bổ nhiệm</strong>${escapeHtml(item.page7_decision || item.page6_decision || '')}</div>
+            <div class="field" style="grid-column:1/-1"><strong>Trang 7 • Feedback từ Sếp Nhím</strong>${escapeHtml(item.page7_boss_feedback || '—')}</div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#39;");
+    }
+
+    function exportJSON(){
+      const data = getResponses();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'nhi_survey_responses.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function clearResponses(){
+      const ok = confirm('Bạn có chắc muốn xoá toàn bộ dữ liệu phản hồi đã lưu trên trình duyệt này không?');
+      if(!ok) return;
+      localStorage.removeItem('nhi_survey_responses');
+      loadResponses();
+    }
+
+    loadResponses();
+  </script>
+</body>
+</html>
