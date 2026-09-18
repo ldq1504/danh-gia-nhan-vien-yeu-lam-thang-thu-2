@@ -85,11 +85,12 @@
     <section class="hero">
       <h1>Theo dõi câu trả lời</h1>
       <p class="sub">
-        Đây là trang riêng để xem lại các phản hồi đã được lưu từ web “Tháng Thứ Hai Của Chúng Mình”.
-        Dữ liệu được lưu trong trình duyệt hiện tại dưới dạng local storage.
+        Câu trả lời chính hiện được lưu online trong Google Sheet của bạn.
+        Phần dữ liệu bên dưới chỉ là bản sao local trên thiết bị đang mở trang này.
       </p>
       <div class="toolbar">
-        <button class="btn" onclick="loadResponses()">Làm mới dữ liệu</button>
+        <button class="btn" onclick="window.open('https://docs.google.com/spreadsheets/d/1h3s9m0Vm7UBVj0UugRI37odWCg2c_gP0kVY5AbuAEWA/edit?gid=1925090178#gid=1925090178','_blank')">Mở database online ↗</button>
+        <button class="btn secondary" onclick="loadResponses()">Làm mới bản sao trên máy này</button>
         <button class="btn secondary" onclick="exportJSON()">Xuất JSON</button>
         <button class="btn secondary" onclick="clearResponses()">Xoá toàn bộ dữ liệu</button>
         <button class="btn secondary" onclick="window.location.href='./index.html'">Quay lại biểu mẫu</button>
@@ -140,8 +141,8 @@
       if(!data.length){
         entries.innerHTML = `
           <div class="empty">
-            Chưa có câu trả lời nào được lưu.<br>
-            Hãy mở biểu mẫu chính, điền câu trả lời và bấm “Nộp phiếu đánh giá ♥”.
+            Chưa có bản sao câu trả lời trên thiết bị này.<br>
+            Để xem phản hồi Nhím gửi từ điện thoại hoặc thiết bị khác, bấm “Mở database online ↗” ở phía trên.
           </div>`;
         return;
       }
