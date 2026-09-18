@@ -572,6 +572,55 @@
     return '';
   }
 
+  function sendToGoogleForm(payload){
+    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSd78wRIkBdAdrs4onfWtHy7EdJoy3WTlrAbU6h6GdrJ2ajDPw/formResponse';
+
+    let iframe = document.getElementById('googleFormSink');
+    if(!iframe){
+      iframe = document.createElement('iframe');
+      iframe.id = 'googleFormSink';
+      iframe.name = 'googleFormSink';
+      iframe.style.display = 'none';
+      iframe.setAttribute('aria-hidden','true');
+      document.body.appendChild(iframe);
+    }
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = formUrl;
+    form.target = 'googleFormSink';
+    form.style.display = 'none';
+
+    const fields = {
+      'entry.850844116': payload.page1_answer,
+      'entry.599675901': payload.page1_promise_checked ? 'Có' : 'Không',
+      'entry.1862870986': payload.page3_answer,
+      'entry.1093925353': payload.page3_other_details,
+      'entry.619739119': payload.page4_multiple_choices.join(' | '),
+      'entry.469107767': payload.page5_satisfaction,
+      'entry.273249912': payload.page7_decision,
+      'entry.1382366052': payload.page7_boss_feedback
+    };
+
+    Object.entries(fields).forEach(([name,value]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value || '';
+      form.appendChild(input);
+    });
+
+    const submit = document.createElement('input');
+    submit.type = 'hidden';
+    submit.name = 'submit';
+    submit.value = 'Submit';
+    form.appendChild(submit);
+
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => form.remove(), 1500);
+  }
+
   function submitSurvey(){
     const payload = buildSubmission();
     const error = validateSubmission(payload);
@@ -595,11 +644,14 @@
     all.push(payload);
     localStorage.setItem('nhi_survey_responses', JSON.stringify(all));
 
+    // Gửi bản chính lên Google Form -> Google Sheet online.
+    sendToGoogleForm(payload);
+
     box.style.background = '#f4fff6';
     box.style.borderColor = '#b8dec0';
     box.style.color = '#366d47';
-    box.innerHTML = `<strong>Đã lưu câu trả lời thành công ♥</strong><br>
-      Cảm ơn Sếp Nhím đã hoàn thành phiếu đánh giá nháaaa hề hề.`;
+    box.innerHTML = `<strong>Đã gửi câu trả lời thành công ♥</strong><br>
+      Câu trả lời đã được gửi vào database online. Cảm ơn Sếp Nhím đã hoàn thành phiếu đánh giá nháaaa hề hề.`;
     hearts();
   }
 
